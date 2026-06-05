@@ -47,7 +47,7 @@ def load_data_split_transformed(location, column_x , column_y ):
     X_test = scale.transform(X_test)
 
     return X_train , X_test , y_train ,y_test
-def load_classification_data_split_transformed(location, column_x,column_y, change_y ,  string_to_be_one  ,string_to_be_zero ):
+def load_classification_data_split_transformed(location, column_x,column_y, change_y ,  string_to_be_one = None  ,string_to_be_zero = None ):
     data = pd.read_csv(location)
     data_c = data.copy()
     df = pd.DataFrame(data_c)
@@ -75,7 +75,7 @@ def load_classification_data_split_transformed(location, column_x,column_y, chan
     X_test = np.column_stack((np.ones(len(X_test)), X_test))
 
     return   X_train ,X_test , y_train , y_test                           
-def load_classification_data_split_transformed_for_sklearn(location, column_x,column_y, change_y ,  string_to_be_one  ,string_to_be_zero ):
+def load_classification_data_split_transformed_for_sklearn(location, column_x,column_y, change_y ,  string_to_be_one =None ,string_to_be_zero = None ):
     data = pd.read_csv(location)
     data_c = data.copy()
     df = pd.DataFrame(data_c)
@@ -98,6 +98,28 @@ def load_classification_data_split_transformed_for_sklearn(location, column_x,co
     scale.fit(X_train)
     X_train = scale.transform(X_train)
     X_test = scale.transform(X_test)  
+
+
+    return   X_train ,X_test , y_train , y_test 
+def load_classification_data_split_transformed_for_DT(location, column_x,column_y, change_y ,  string_to_be_one = None  ,string_to_be_zero = None ):
+    data = pd.read_csv(location)
+    data_c = data.copy()
+    df = pd.DataFrame(data_c)
+    X = df.iloc[:,[column_x]]
+    y = df.iloc[:,[column_y]].values
+
+  
+    if change_y:
+        y = y.replace({string_to_be_one : 0 , string_to_be_zero : 1 })
+
+    else: 
+        pass 
+
+
+
+    X_train ,X_test , y_train , y_test = train_test_split(
+        X , y , test_size=0.2 , random_state=42 
+    )
 
 
     return   X_train ,X_test , y_train , y_test 

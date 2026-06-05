@@ -3,5 +3,3 @@ __pycache__/
 .env
 .ipynb_checkpoints/
 datasets/*/raw/
-# Optional: ignore all datasets (safer if large)
-datasets/**

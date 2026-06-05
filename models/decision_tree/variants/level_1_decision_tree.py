@@ -7,8 +7,8 @@ compute impurity →
 keep the best split"""
 
 
-X = np.array([2, 3, 10, 19])
-y = np.array([0, 0, 1, 1])
+X = np.array([2, 3, 10, 19,20,22,26,])
+y = np.array([0, 0, 1, 1,0,0,1])
 
 # what threshold should we try?
 
@@ -35,6 +35,7 @@ def best_split(X,y):
     best_score = float("inf")
     best_left = []
     best_right = []
+    thresholds = np.unique(X)
         
     for threshold in thresholds :
         t = threshold
@@ -82,7 +83,7 @@ print(best_right)
 
 def build_tree(X , y , depth = 0 , maxdepth = 3):
     #stoping criteria 
-    if len(np.unique(y) == 1):
+    if len(np.unique(y)) == 1:
         return y[0]
     if depth >= maxdepth :
         prediction = most_common_lable(y)
@@ -106,11 +107,13 @@ def build_tree(X , y , depth = 0 , maxdepth = 3):
     left_subtree = build_tree(X_left , y_left , depth+1 , maxdepth )
     right_subtree = build_tree(X_right , y_right , depth+1 , maxdepth)
     
-    return {
+    return print ({
         "threshold":threshold ,
         "left" : left_subtree , 
         "right" : right_subtree
-    }
+    })
+build_tree(X , y)
+
 
 
     
