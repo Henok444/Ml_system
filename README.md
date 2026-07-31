@@ -65,7 +65,7 @@ and interpreted with SHAP.
 - Full project repo: [crop-recommendation-ensemble](https://github.com/Henok444/crop-recommendation-ensemble)
 - Production API repo: [crop-recommendation-api](https://github.com/Henok444/crop-recommendation-api)
 - Notebook: `notebooks/Practical_Ensemble_Learning_Precision_Agriculture.ipynb`
-- Report: `reports/Practical_Ensemble_Learning_Precision_Agriculture.pdf`
+- Report: [Practical_Ensemble_Learning_Precision_Agriculture.pdf](https://github.com/Henok444/Ml_system/releases/tag/reports-v1) (GitHub Release)
 
 ## Setup
 
