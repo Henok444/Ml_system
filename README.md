@@ -1,57 +1,84 @@
-# Machine Learning Systems Repository
+# Ml_system
 
+A hands-on machine learning lab: classic algorithms implemented **from scratch**,
+then re-implemented with **scikit-learn** and packaged into **pipelines** — with
+per-algorithm experiments, notes, and results.
 
-A structured repository for machine learning experimentation,
-algorithm implementation, data analysis, and model evaluation.
-
-The repository contains:
-- Machine learning algorithm implementations
-- End-to-end machine learning projects
-- Exploratory data analysis workflows
-- Scientific computing experiments
-- Model evaluation and interpretation studies
+The goal of this repo is the learning journey: each model folder shows the same
+algorithm at three levels of maturity.
 
 ## Repository Structure
 
-datasets/
-notebooks/
-reports/
-models/
-experiments/
-utils/
+```
+models/                    Algorithms at three levels: from-scratch → sklearn → pipeline
+  linear_regression/       Batch GD, Normal Equation, Stochastic GD
+  logistic_regression/     Gradient descent, binary cross-entropy
+  regularized_logistic_regression/  L2-regularized GD
+  decision_tree/           Split quality, thresholds (level_0 → level_1 → simple)
+  Random_forest/           Bagging + randomized feature selection
+  polynomial_regressio/    Degree selection & feature engineering
+  KNN/                     Distance-based classification
+  svm/                     Hinge loss, kernels (notes + sklearn + pipeline)
+  bagging/                 Bootstrap aggregation
+  boosting/                AdaBoost + Gradient Boosting
+  XG_boost/                Gradient-boosted trees
+experiments/               Per-algorithm experiment scripts + results.md
+utils/                     Shared data loading, metrics, and plotting helpers
+configs/                   Config files
+api/                       Crop recommendation REST API (FastAPI)
+notebooks/                 EDA and project notebooks
+reports/                   Project reports and visualizations
+```
 
 ## Implemented Models
 
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- Support Vector Machine (SVM)
-- XGBoost
+| Model | From scratch | scikit-learn | Pipeline | Notes |
+|-------|:---:|:---:|:---:|-------|
+| Linear Regression | ✅ (batch GD, normal eq., SGD) | ✅ | ✅ | ✅ |
+| Logistic Regression | ✅ (GD, BCE) | ✅ | ✅ | ✅ |
+| Regularized Logistic Regression | ✅ (L2) | ✅ | ✅ | ✅ |
+| Decision Tree | ✅ (3 levels) | ✅ | ✅ | ✅ |
+| Random Forest | ✅ | ✅ | — | ✅ |
+| Polynomial Regression | ✅ | — | ✅ | ✅ |
+| KNN | — | ✅ | — | ✅ |
+| SVM | — | ✅ | ✅ | ✅ |
+| Bagging | ✅ | — | — | — |
+| AdaBoost / Gradient Boosting | ✅ | — | — | — |
+| XGBoost | — | ✅ | — | — |
 
-## Featured Project
+## Selected Experiment Results
 
-### Ensemble Learning for Precision Agriculture
+| Experiment | Setup | Result |
+|-----------|-------|--------|
+| Linear Regression — learning rate sensitivity (batch GD, housing) | lr ∈ {0.001, 0.01, 0.1} | 0.01 stable; 0.001 too slow; 0.1 diverges |
+| Logistic Regression — from scratch vs sklearn | GD with intercept scaling bug found & fixed | Matches sklearn accuracy after fix |
+| Polynomial Regression — degree selection | degree sweep | Best degree: 8 |
+| Decision Tree — from-scratch baseline | own splitter vs sklearn | See `experiments/decsion_tree/results.md` |
+| SVM — hyperparameter tuning | GridSearchCV vs manual tuning | See `experiments/svm/sklearn/` |
 
-Objective:
-Predict suitable crops using environmental and soil measurements.
+## Featured Project: Ensemble Learning for Precision Agriculture
 
-Methods:
-- Random Forest
-- XGBoost
+Crop recommendation on 2,200 observations × 22 crop classes with Random Forest
+and XGBoost (GridSearchCV-tuned), evaluated with accuracy/precision/recall/F1
+and interpreted with SHAP.
 
-Evaluation:
-- Accuracy
-- Precision
-- Recall
-- F1-score
+- Full project repo: [crop-recommendation-ensemble](https://github.com/Henok444/crop-recommendation-ensemble)
+- Production API repo: [crop-recommendation-api](https://github.com/Henok444/crop-recommendation-api)
+- Notebook: `notebooks/Practical_Ensemble_Learning_Precision_Agriculture.ipynb`
+- Report: `reports/Practical_Ensemble_Learning_Precision_Agriculture.pdf`
 
-Interpretability:
-- Feature Importance
-- SHAP Analysis
+## Setup
 
-## Future Work
+```
+pip install -r requirements.txt
+```
 
-- Deep Learning with PyTorch
-- FastAPI Model Deployment
-- Experiment Tracking
-- MLOps Fundamentals
+Run any experiment script directly, e.g.:
+
+```
+python experiments/linear_regression/exp_01_testing_NE_model.py
+```
+
+## Built With
+
+Python · NumPy · Pandas · Matplotlib · Scikit-learn · XGBoost · SHAP · FastAPI
