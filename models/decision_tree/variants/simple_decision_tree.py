@@ -53,6 +53,7 @@ class DecisionTree():
         index = np.argmax(counts)
         return value[index]
     def build_tree(self,  X , y , depth = 0 , maxdepth=3):
+        y = np.asarray(y).ravel()
             #stoping criteria 
         if len(np.unique(y)) == 1:
             return y[0]

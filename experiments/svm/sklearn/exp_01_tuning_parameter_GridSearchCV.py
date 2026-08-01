@@ -4,8 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
-from sklearn.metrics import classification_report
-from sklearn.metrics import r2_score
+from sklearn.metrics import accuracy_score
 
 # data
 X, y = load_breast_cancer(return_X_y=True)
@@ -39,18 +38,9 @@ grid = GridSearchCV(
 
 grid.fit(X_train,y_train)
 
-print(grid.best_params_)
-model = SVC(
-    C = 10 , 
-    kernel= 'poly',
-    degree= 4 ,
-    gamma= 0.01,
-    coef0= 0.00 , 
-)
-model.fit(X_train , y_train )
-y_new = model.predict(X_test)
-print(r2_score(y_test , y_new ), classification_report(y_test , y_new))
-print(model.n_support_
-)
+print("Best params:", grid.best_params_)
+print(f"Best CV accuracy: {grid.best_score_:.4f}")
+y_new = grid.best_estimator_.predict(X_test)
+print(f"Test accuracy: {accuracy_score(y_test, y_new):.4f}")
 
 

@@ -16,7 +16,7 @@ models/                    Algorithms at three levels: from-scratch → sklearn 
   regularized_logistic_regression/  L2-regularized GD
   decision_tree/           Split quality, thresholds (level_0 → level_1 → simple)
   Random_forest/           Bagging + randomized feature selection
-  polynomial_regressio/    Degree selection & feature engineering
+  polynomial_regression/    Degree selection & feature engineering
   KNN/                     Distance-based classification
   svm/                     Hinge loss, kernels (notes + sklearn + pipeline)
   bagging/                 Bootstrap aggregation
@@ -50,11 +50,11 @@ reports/                   Project reports and visualizations
 
 | Experiment | Setup | Result |
 |-----------|-------|--------|
-| Linear Regression — learning rate sensitivity (batch GD, housing) | lr ∈ {0.001, 0.01, 0.1} | 0.01 stable; 0.001 too slow; 0.1 diverges |
-| Logistic Regression — from scratch vs sklearn | GD with intercept scaling bug found & fixed | Matches sklearn accuracy after fix |
-| Polynomial Regression — degree selection | degree sweep | Best degree: 8 |
-| Decision Tree — from-scratch baseline | own splitter vs sklearn | See `experiments/decsion_tree/results.md` |
-| SVM — hyperparameter tuning | GridSearchCV vs manual tuning | See `experiments/svm/sklearn/` |
+| Linear Regression — learning rate sensitivity (batch GD, turbine) | lr ∈ {0.001, 0.01, 0.1}, 1000 epochs | 0.001 too slow (R² −0.055); 0.01/0.1 converge to R² 0.15; normal equation reaches R² 0.9999 |
+| Logistic Regression — from scratch vs sklearn | GD with intercept scaling bug found & fixed | From-scratch train acc 0.7875; sklearn baseline 0.9737 (breast cancer) |
+| Polynomial Regression — degree selection | degree sweep 2–19 | Best degree: 8 |
+| Decision Tree — from-scratch baseline | own splitter (gini, depth 3) | Test accuracy 0.9 — `experiments/decsion_tree/results.md` |
+| SVM — hyperparameter tuning | GridSearchCV vs manual tuning | Best C=10, gamma=0.01, rbf — test 0.9825 — `experiments/svm/sklearn/` |
 
 ## Featured Project: Ensemble Learning for Precision Agriculture
 
@@ -78,6 +78,11 @@ Run any experiment script directly, e.g.:
 ```
 python experiments/linear_regression/exp_01_testing_NE_model.py
 ```
+
+The experiment scripts expect a `datasets/` folder next to `utils/` (gitignored
+— the data files come from public sources such as Kaggle/UCI). Without it the
+scripts cannot load data; the results recorded in each `experiments/*/results.md`
+come from real runs with those datasets.
 
 ## Built With
 

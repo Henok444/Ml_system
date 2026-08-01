@@ -5,11 +5,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
 import pandas as pd 
 from utils.plotting import plot
 from sklearn.linear_model import LogisticRegression
 import numpy as np 
-from sklearn.metrics import r2_score
 
 X , y   = load_breast_cancer( return_X_y= True)
 
@@ -27,6 +27,6 @@ w = model.named_steps['linear'].coef_
 b = model.named_steps['linear'].intercept_
 
 theta = np.column_stack((b , w))
-accuracy = r2_score(y_test, y_new)
-print(accuracy)
+accuracy = accuracy_score(y_test, y_new)
+print(f"Test accuracy: {accuracy}")
 

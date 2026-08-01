@@ -1,5 +1,6 @@
 from models.decision_tree.variants.simple_decision_tree import DecisionTree
 from utils.data_loader import load_classification_data_split_transformed_for_DT
+from sklearn.metrics import accuracy_score
 import numpy as np
 
 
@@ -9,5 +10,6 @@ X_test = np.asarray(X_test)
 model = DecisionTree()
 
 model.fit(X_train, y_train)
-model.predict_batch(X_test)
+y_new = model.predict_batch(X_test)
+print(f"Test accuracy: {accuracy_score(y_test, y_new)}")
 

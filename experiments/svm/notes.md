@@ -1,46 +1,31 @@
 
 # SVM using sklearn library
 
-## Exp 01 
+## Learning notes
+- C controls the bias-variance trade-off: a small C gives high bias but low
+  variance; a large C does the opposite.
+- Default SVM accuracy was much higher than logistic regression on the same
+  data.
+- Kernel comparison on this data: poly < linear < rbf.
 
+## Exp 01 — GridSearchCV tuning (`sklearn/exp_01_tuning_parameter_GridSearchCV.py`)
+Breast cancer, 80/20 split, seed 42. Grid: C ∈ {0.1, 1, 10, 100},
+gamma ∈ {1, 0.1, 0.01, 0.001}, rbf kernel, 5-fold CV.
+- **Best params: C = 10, gamma = 0.01, kernel = rbf**
+- Best CV accuracy = 0.9736
+- **Test accuracy = 0.9825**
 
+## Exp 02 — manual tuning (`sklearn/exp_02_tuning_parameter_self.py`)
+Manual C sweep, rbf kernel, gamma = 0.01, same split as Exp 01.
 
+| C    | Test accuracy |
+|------|---------------|
+| 0.1  | 0.9649        |
+| 1    | 0.9649        |
+| 10   | 0.9825        |
+| 100  | 0.9561        |
 
-## EXP 02
-
-C controls the bias vs variance trade off 
-small value of C will have high bias but low variance 
-
-the avcuracy  for default support vector machine is much much more high than logistic regression 
-
-testing for different c value i = 1 - 10 
-
-0.9385964912280702
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-0.9473684210526315
-
-now i tested for the value of b = 1 / float( 10**(i - 5))
-
-result
-0.9473684210526315
-0.956140350877193
-0.956140350877193
-0.9824561403508771
-0.9473684210526315
-0.9473684210526315
-0.9385964912280702
-0.7719298245614035
-0.6228070175438597
-0.6228070175438597
-
-the best accuracy is when C is 100
-kernel 
- poly < linear < rbf
+C = 10 is the best manual choice, matching the GridSearchCV result. The
+previous notes (fixed C = 10 trained 10 times, gamma sweep) came from an older
+version of the script and no longer match its output.
 ================================================
